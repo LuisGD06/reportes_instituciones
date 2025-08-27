@@ -58,3 +58,15 @@ if st.button("Exportar reporte a PowerPoint"):
         comments=summary_text
     )
     st.success(f"Reporte creado: {path}")
+
+    # 🔽 Botón de descarga (lee el archivo en el contenedor y lo ofrece al usuario)
+    try:
+        with open(path, "rb") as f:
+            st.download_button(
+                label="Descargar PPT",
+                data=f.read(),
+                file_name=f"Reporte_{inst}.pptx",
+                mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            )
+    except Exception as e:
+        st.error(f"No se pudo abrir el archivo para descargar: {e}")
